@@ -76,6 +76,21 @@ server.get('/api/projects', (req, res) => {
         })
 });
 
+server.delete('/api/projects/:id', (req, res) => {
+    db('projects')
+        .where({ id: req.params.id})
+        .del()
+        .then(count => {
+            count ?
+            res.status(204).end()
+            : res.status(404).json({ error: 'Project with that ID does not exist' })
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({ error: 'Could not remove project' })
+        })
+});
+
 
 
 const port = process.env.PORT || 3300;
