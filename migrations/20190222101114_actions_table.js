@@ -2,7 +2,7 @@
 exports.up = function(knex, Promise) {
     return knex.schema.createTable('actions', tbl => {
         tbl.increments();
-        tbl.integer('proectId').unsigned().references('id').inTable('projects')
+        tbl.integer('projectId').unsigned().references('id').inTable('projects')
           .onDelete('CASCADE').onUpdate('CASCADE').notNullable();
         tbl.string('action', 50).unique().notNullable();
         tbl.string('notes', 255).unique().notNullable();
